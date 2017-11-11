@@ -46,6 +46,8 @@ def roundtime(month, day, year, hour, minute):
         roundMinute-=subtraction
     return month, day, year, hour, roundMinute
 
+#for now, the csv files live in the data folder
+prepend = "/data/"
 def currentfile(month, day, year, hour, minute):
     month, day, year, hour, minute = roundtime(month, day, year, hour, minute)
     #general standardization
@@ -64,7 +66,7 @@ def currentfile(month, day, year, hour, minute):
     if len(minute) < 2:
         minute = "0" + minute
 
-    return month + "_" + day + "_" + year + "_" + hour + "_" + minute + ".csv"
+    return prepend + month + "_" + day + "_" + year + "_" + hour + "_" + minute + ".csv"
 
 #returns how many people are in frary at a certain time
 def fraryTimeCount(month, day, year, hour, minute):
