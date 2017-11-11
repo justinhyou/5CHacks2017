@@ -201,4 +201,4 @@ def main():
 #playzone
 #print fileLookup()
 #print AllDiningCount(11, 10, 2017, 5, 35)
-print prevDiningCount(10, 1, 2017, 0, 0, 10, 31, 2017, 23, 55)
+print prevDiningCount(10, 1, 2017, 0, 0, 10, 30, 2017, 23, 55)
