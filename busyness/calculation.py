@@ -4,11 +4,11 @@ import csv
 import matplotlib.path as mplPath
 
 #format: quadralateral (x1, y1, x2, y2,...) corresponding to the four corners
-frary_2d = [1, 1, 2, 5, 6, 6, 5, 0]
+frary_2d = np.array([1, 1, 2, 5, 6, 6, 5, 0])
 
 #function returns how many people are at frary at a certain time
 def fraryCount():
-	with open('tues_11_05.csv', 'rb') as csvfile:
+	with open('tues_11_10_2017_5_35.csv', 'rb') as csvfile:
 		has_header = csv.Sniffer().has_header(inf.read(1024))
 		reader = csv.reader(csvfile, delimiter=",")
 		if (has_header):
