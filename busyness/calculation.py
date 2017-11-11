@@ -209,12 +209,20 @@ def main():
 #print fileLookup()
 #print AllDiningCount(11, 10, 2017, 5, 35)
 output = prevDiningCount(10, 1, 2017, 0, 0, 10, 30, 2017, 23, 55)
-num_bins = 30
-n, bins, patches = plt.hist(output[0], num_bins, facecolor='blue', alpha=0.5)
+print len(output[0])
+x_axis = []
+for i in range(len(output[0])):
+    x_axis += [i]
+plt.plot(x_axis, output[0])
+
 plt.show()
-n, bins, patches = plt.hist(output[1], num_bins, facecolor='blue', alpha=0.5)
-plt.show()
-n, bins, patches = plt.hist(output[2], num_bins, facecolor='blue', alpha=0.5)
-plt.show()
-n, bins, patches = plt.hist(output[3], num_bins, facecolor='blue', alpha=0.5)
-plt.show()
+#count histograms
+# num_bins = 30
+# n, bins, patches = plt.hist(output[0], num_bins, facecolor='blue', alpha=0.5)
+# plt.show()
+# n, bins, patches = plt.hist(output[1], num_bins, facecolor='blue', alpha=0.5)
+# plt.show()
+# n, bins, patches = plt.hist(output[2], num_bins, facecolor='blue', alpha=0.5)
+# plt.show()
+# n, bins, patches = plt.hist(output[3], num_bins, facecolor='blue', alpha=0.5)
+# plt.show()
