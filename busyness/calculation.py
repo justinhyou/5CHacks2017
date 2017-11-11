@@ -9,8 +9,9 @@ frary_2d = np.array([1, 1, 2, 5, 6, 6, 5, 0])
 #function returns how many people are at frary at a certain time
 def fraryCount():
 	with open('tues_11_10_2017_5_35.csv', 'rb') as csvfile:
-		has_header = csv.Sniffer().has_header(inf.read(1024))
+		has_header = csv.Sniffer().has_header(csvfile.read(1024))
 		reader = csv.reader(csvfile, delimiter=",")
+        print reader
 		if (has_header):
 			next(reader)
 		counter = 0
@@ -23,10 +24,10 @@ def fraryCount():
 	return counter
 
 def timeEstimate():
-
+    return 'tues_11_10_2017_5_35.csv'
 
 def main():
-	
+	return 5
 
 
 
