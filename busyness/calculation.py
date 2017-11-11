@@ -3,6 +3,8 @@ import numpy as np
 import csv
 import matplotlib.path as mplPath
 from datetime import datetime
+import matplotlib.mlab as mlab
+import matplotlib.pyplot as plt
 
 frary_2d = np.array([[1, 1], [2, 5], [6, 6], [5, 0]])
 
@@ -47,7 +49,7 @@ def roundtime(month, day, year, hour, minute):
     return month, day, year, hour, roundMinute
 
 #for now, the csv files live in the data folder
-prepend = "/data/"
+prepend = "data/"
 def currentfile(month, day, year, hour, minute):
     month, day, year, hour, minute = roundtime(month, day, year, hour, minute)
     #general standardization
@@ -125,7 +127,8 @@ def AllDiningCount(month, day, year, hour, minute):
     hoch = 0
     mcconnell = 0
     document_name = currentfile(month, day, year, hour, minute)
-    with open(document_name, "r") as f:
+    script_dir = os.path.dirname("calculation.py")
+    with open(os.path.join(script_dir, document_name), "r") as f:
         reader = csv.reader(f, delimiter=",")
         frary_b = mplPath.Path(frary_boundary)
         frank_b = mplPath.Path(frank_boundary)
@@ -139,19 +142,19 @@ def AllDiningCount(month, day, year, hour, minute):
             if (header):
                 header = False
                 continue
-            if (frary_b.contains_point((int(line[0]), int(line[1])))):
+            if (frary_b.contains_point((float(line[0]), float(line[1])))):
                 frary+=1
-            elif (frank_b.contains_point((int(line[0]), int(line[1])))):
+            elif (frank_b.contains_point((float(line[0]), float(line[1])))):
                 frank+=1
-            elif (oldenborg_b.contains_point((int(line[0]), int(line[1])))):
+            elif (oldenborg_b.contains_point((float(line[0]), float(line[1])))):
                 oldenborg+=1
-            elif (collins_b.contains_point((int(line[0]), int(line[1])))):
+            elif (collins_b.contains_point((float(line[0]), float(line[1])))):
                 collins+=1
-            elif (malott_b.contains_point((int(line[0]), int(line[1])))):
+            elif (malott_b.contains_point((float(line[0]), float(line[1])))):
                 malott+=1
-            elif (hoch_b.contains_point((int(line[0]), int(line[1])))):
+            elif (hoch_b.contains_point((float(line[0]), float(line[1])))):
                 hoch+=1
-            elif (mcconnell_b.contains_point((int(line[0]), int(line[1])))):
+            elif (mcconnell_b.contains_point((float(line[0]), float(line[1])))):
                 mcconnell+=1
 
     return [frary, frank, oldenborg, collins, malott, hoch, mcconnell]
@@ -187,14 +190,16 @@ def prevDiningCount(month_begin, day_begin, year_begin, hour_begin, minute_begin
                 # the actual calcuation call
                 current = AllDiningCount(month, day, year, hour, minute)
                 # update totalLife
-                for i in totalLife:
-                    totalLife[i]+=current[i]
+                for i in range(len(totalLife)):
+                    totalLife[i]+=[current[i]]
                 # update minute
                 minute+=5
             # update hour
             hour+=1
         #update day
         day += 1
+
+    return totalLife
 
 #main function that takes in commandline argument
 def main():
@@ -203,4 +208,21 @@ def main():
 #playzone
 #print fileLookup()
 #print AllDiningCount(11, 10, 2017, 5, 35)
-print prevDiningCount(10, 1, 2017, 0, 0, 10, 30, 2017, 23, 55)
+output = prevDiningCount(10, 1, 2017, 0, 0, 10, 30, 2017, 23, 55)
+print len(output[0])
+x_axis = []
+for i in range(len(output[0])):
+    x_axis += [i]
+plt.plot(x_axis, output[0])
+
+plt.show()
+#count histograms
+# num_bins = 30
+# n, bins, patches = plt.hist(output[0], num_bins, facecolor='blue', alpha=0.5)
+# plt.show()
+# n, bins, patches = plt.hist(output[1], num_bins, facecolor='blue', alpha=0.5)
+# plt.show()
+# n, bins, patches = plt.hist(output[2], num_bins, facecolor='blue', alpha=0.5)
+# plt.show()
+# n, bins, patches = plt.hist(output[3], num_bins, facecolor='blue', alpha=0.5)
+# plt.show()
